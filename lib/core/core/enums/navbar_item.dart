@@ -1,0 +1,4 @@
+enum NavbarScreen {
+  home,
+  profile,
+}
