@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:haretna/core/assets/icons/icons.dart';
-import 'package:haretna/core/components/custom_image.dart';
-import 'package:haretna/core/theme/colors.dart';
-import 'package:haretna/core/utils/extensions/app_common.dart';
-import 'package:haretna/core/utils/size_utils.dart';
+import '../../core/assets/icons/icons.dart';
+import '../../core/components/custom_image.dart';
+import '../../core/theme/colors.dart';
+import '../../core/utils/extensions/app_common.dart';
+import '../../core/utils/size_utils.dart';
 
 class NotificationWidget extends StatelessWidget {
   const NotificationWidget({super.key});

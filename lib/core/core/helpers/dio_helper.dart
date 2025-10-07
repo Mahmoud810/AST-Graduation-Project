@@ -6,8 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/utils.dart';
-import 'package:haretna/core/utils/common_method.dart';
-import 'package:haretna/core/utils/local_storage.dart';
+import '../../core/utils/common_method.dart';
+import '../../core/utils/local_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../utils/remote/end_points.dart';
@@ -38,7 +38,7 @@ class DioHelper {
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
-          "Accept-Language": isArabic ? 'ar' : 'en'
+          "Accept-Language": isArabic ? 'ar' : 'en',
         },
       ),
     );
@@ -66,8 +66,10 @@ class DioHelper {
   }
 
   void updateHeaderLanguage() {
-    dio.options.headers.update("Accept-Language",
-        (value) => Get.locale != null ? Get.locale?.languageCode : 'ar');
+    dio.options.headers.update(
+      "Accept-Language",
+      (value) => Get.locale != null ? Get.locale?.languageCode : 'ar',
+    );
   }
 
   Future<Response> getData({
@@ -87,10 +89,7 @@ class DioHelper {
     }
     updateHeaderLanguage();
 
-    final response = await dio.get(
-      url,
-      queryParameters: query,
-    );
+    final response = await dio.get(url, queryParameters: query);
 
     return response;
   }
@@ -129,11 +128,7 @@ class DioHelper {
       });
     }
     updateHeaderLanguage();
-    final response = await dio.post(
-      url,
-      queryParameters: query,
-      data: data,
-    );
+    final response = await dio.post(url, queryParameters: query, data: data);
     dev.log((response.data['error'] != null).toString());
 
     return (response);
@@ -151,11 +146,7 @@ class DioHelper {
       });
     }
     updateHeaderLanguage();
-    final response = await dio.patch(
-      url,
-      queryParameters: query,
-      data: data,
-    );
+    final response = await dio.patch(url, queryParameters: query, data: data);
 
     return (response);
   }
@@ -173,11 +164,7 @@ class DioHelper {
     }
     updateHeaderLanguage();
 
-    final response = await dio.put(
-      url,
-      queryParameters: query,
-      data: data,
-    );
+    final response = await dio.put(url, queryParameters: query, data: data);
 
     return (response);
   }
@@ -195,11 +182,7 @@ class DioHelper {
     }
     updateHeaderLanguage();
 
-    final response = await dio.delete(
-      url,
-      data: data,
-      queryParameters: query,
-    );
+    final response = await dio.delete(url, data: data, queryParameters: query);
 
     return (response);
   }
@@ -220,9 +203,10 @@ class DioHelper {
     if (!isSuccessResponse(response: response)) {
       log('handle response ${response.data}');
       throw DioException(
-          response: response,
-          requestOptions: response.requestOptions,
-          type: DioExceptionType.badResponse);
+        response: response,
+        requestOptions: response.requestOptions,
+        type: DioExceptionType.badResponse,
+      );
     }
     return response.data;
   }

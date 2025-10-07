@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haretna/core/theme/colors.dart';
-import 'package:haretna/core/utils/app_constants.dart';
-import 'package:haretna/core/utils/extensions/boolean_extension.dart';
-import 'package:haretna/core/utils/extensions/string_extensions.dart';
+import '../../core/theme/colors.dart';
+import '../../core/utils/app_constants.dart';
+import '../../core/utils/extensions/boolean_extension.dart';
+import '../../core/utils/extensions/string_extensions.dart';
 
 import '../utils/extensions/app_common.dart';
 
@@ -60,18 +60,18 @@ class _AppButtonWidgetState extends State<AppButtonWidget>
 
   @override
   void initState() {
-    if (widget.enableScaleAnimation
-        .validate(value: enableAppButtonScaleAnimationGlobal)) {
-      _controller = AnimationController(
-        vsync: this,
-        duration: const Duration(
-          milliseconds: 50,
-        ),
-        lowerBound: 0.0,
-        upperBound: 0.1,
-      )..addListener(() {
-          setState(() {});
-        });
+    if (widget.enableScaleAnimation.validate(
+      value: enableAppButtonScaleAnimationGlobal,
+    )) {
+      _controller =
+          AnimationController(
+            vsync: this,
+            duration: const Duration(milliseconds: 50),
+            lowerBound: 0.0,
+            upperBound: 0.1,
+          )..addListener(() {
+            setState(() {});
+          });
     }
     super.initState();
   }
@@ -88,8 +88,9 @@ class _AppButtonWidgetState extends State<AppButtonWidget>
       _scale = 1 - _controller!.value;
     }
 
-    if (widget.enableScaleAnimation
-        .validate(value: enableAppButtonScaleAnimationGlobal)) {
+    if (widget.enableScaleAnimation.validate(
+      value: enableAppButtonScaleAnimationGlobal,
+    )) {
       return Listener(
         onPointerDown: (details) {
           _controller?.forward();
@@ -97,10 +98,7 @@ class _AppButtonWidgetState extends State<AppButtonWidget>
         onPointerUp: (details) {
           _controller?.reverse();
         },
-        child: Transform.scale(
-          scale: _scale,
-          child: buildButton(),
-        ),
+        child: Transform.scale(scale: _scale, child: buildButton()),
       );
     } else {
       return buildButton();
@@ -127,10 +125,12 @@ class _AppButtonWidgetState extends State<AppButtonWidget>
           focusColor: widget.focusColor,
           hoverColor: widget.hoverColor,
           splashColor: widget.splashColor,
-          child: widget.child ??
+          child:
+              widget.child ??
               Text(
                 widget.text!.validate(),
-                style: widget.textStyle ??
+                style:
+                    widget.textStyle ??
                     boldTextStyle(
                       color: widget.textColor ?? AppColors.whiteColor,
                     ),

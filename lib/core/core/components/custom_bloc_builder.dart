@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haretna/core/components/custom_loading_indicator.dart';
+import '../../core/components/custom_loading_indicator.dart';
 
 class CustomBlocBuilderView extends StatelessWidget {
   final bool isLoadingState;

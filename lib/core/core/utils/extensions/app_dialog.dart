@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:haretna/core/utils/common_method.dart';
-import 'package:haretna/core/utils/extensions/app_common.dart';
-import 'package:haretna/core/utils/size_utils.dart';
+import '../../utils/common_method.dart';
+import '../..//utils/extensions/app_common.dart';
+import '../..//utils/size_utils.dart';
 
 import '../../assets/icons/icons.dart';
 import '../../theme/colors.dart';
@@ -32,11 +32,13 @@ class TopLoader {
 }
 
 class AppDialog {
-  static Future<Object?> showConfirmDialog(BuildContext context,
-      {required String title,
-      required Function onAccept,
-      String? okTitle,
-      bool dismissable = true}) async {
+  static Future<Object?> showConfirmDialog(
+    BuildContext context, {
+    required String title,
+    required Function onAccept,
+    String? okTitle,
+    bool dismissable = true,
+  }) async {
     return await showGeneralDialog(
       barrierLabel: "Barrier",
       barrierDismissible: dismissable,
@@ -52,18 +54,22 @@ class AppDialog {
       },
       transitionBuilder: (context, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-              .animate(anim),
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(anim),
           child: child,
         );
       },
     );
   }
 
-  static Future<Object?> showDeleteDialog(BuildContext context,
-      {required String title,
-      required Function onAccept,
-      bool dismissable = true}) async {
+  static Future<Object?> showDeleteDialog(
+    BuildContext context, {
+    required String title,
+    required Function onAccept,
+    bool dismissable = true,
+  }) async {
     return await showGeneralDialog(
       barrierLabel: "Barrier",
       barrierDismissible: dismissable,
@@ -71,28 +77,29 @@ class AppDialog {
       transitionDuration: const Duration(milliseconds: 300),
       context: context,
       pageBuilder: (context, _, __) {
-        return DeleteDialogContent(
-          title: title,
-          onAccept: onAccept,
-        );
+        return DeleteDialogContent(title: title, onAccept: onAccept);
       },
       transitionBuilder: (context, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-              .animate(anim),
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(anim),
           child: child,
         );
       },
     );
   }
 
-  static Future<Object?> showSelectSatusDialog(BuildContext context,
-      {required Function onSelect,
-      required String title,
-      required String choice1,
-      required String choice2,
-      String choice3 = '',
-      bool dismissable = true}) async {
+  static Future<Object?> showSelectSatusDialog(
+    BuildContext context, {
+    required Function onSelect,
+    required String title,
+    required String choice1,
+    required String choice2,
+    String choice3 = '',
+    bool dismissable = true,
+  }) async {
     return await showGeneralDialog(
       barrierLabel: "Barrier",
       barrierDismissible: dismissable,
@@ -110,8 +117,10 @@ class AppDialog {
       },
       transitionBuilder: (context, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-              .animate(anim),
+          position: Tween(
+            begin: const Offset(0, 1),
+            end: const Offset(0, 0),
+          ).animate(anim),
           child: child,
         );
       },
@@ -122,20 +131,13 @@ class AppDialog {
     return await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now().subtract(
-        const Duration(days: 400),
-      ),
-      lastDate: DateTime.now().add(
-        const Duration(days: 400),
-      ),
+      firstDate: DateTime.now().subtract(const Duration(days: 400)),
+      lastDate: DateTime.now().add(const Duration(days: 400)),
     );
   }
 
   static Future<TimeOfDay?> showMyTimePicker(BuildContext context) async {
-    return await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+    return await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 
   static Future<bool?> showCustomBottomSheet(
@@ -221,10 +223,7 @@ class ConfirmDialogContent extends StatelessWidget {
                     : (isLandscape ? Get.height * 0.35 : Get.height * 0.2),
               ),
               vSpace(8),
-              Text(
-                title,
-                style: boldTextStyle(size: 17),
-              ),
+              Text(title, style: boldTextStyle(size: 17)),
               const Spacer(),
               Row(
                 children: [
@@ -242,7 +241,9 @@ class ConfirmDialogContent extends StatelessWidget {
                         child: Text(
                           okTitle ?? 'save'.tr,
                           style: boldTextStyle(
-                              size: 17, color: AppColors.whiteColor),
+                            size: 17,
+                            color: AppColors.whiteColor,
+                          ),
                         ),
                       ),
                     ),
@@ -262,7 +263,9 @@ class ConfirmDialogContent extends StatelessWidget {
                         child: Text(
                           'cancel'.tr,
                           style: boldTextStyle(
-                              size: 17, color: AppColors.primaryColor),
+                            size: 17,
+                            color: AppColors.primaryColor,
+                          ),
                         ),
                       ),
                     ),
@@ -280,8 +283,11 @@ class ConfirmDialogContent extends StatelessWidget {
 class DeleteDialogContent extends StatelessWidget {
   final String title;
   final Function onAccept;
-  const DeleteDialogContent(
-      {super.key, required this.title, required this.onAccept});
+  const DeleteDialogContent({
+    super.key,
+    required this.title,
+    required this.onAccept,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -313,10 +319,7 @@ class DeleteDialogContent extends StatelessWidget {
                     : (isLandscape ? Get.height * 0.35 : Get.height * 0.2),
               ),
               vSpace(8),
-              Text(
-                title,
-                style: boldTextStyle(size: 17),
-              ),
+              Text(title, style: boldTextStyle(size: 17)),
               const Spacer(),
               Row(
                 children: [
@@ -334,7 +337,9 @@ class DeleteDialogContent extends StatelessWidget {
                         child: Text(
                           'delete'.tr,
                           style: boldTextStyle(
-                              size: 17, color: AppColors.redLightColor),
+                            size: 17,
+                            color: AppColors.redLightColor,
+                          ),
                         ),
                       ),
                     ),
@@ -354,7 +359,9 @@ class DeleteDialogContent extends StatelessWidget {
                         child: Text(
                           'cancel'.tr,
                           style: boldTextStyle(
-                              size: 17, color: AppColors.greenColor),
+                            size: 17,
+                            color: AppColors.greenColor,
+                          ),
                         ),
                       ),
                     ),
@@ -375,13 +382,14 @@ class StatusDialogContent extends StatelessWidget {
   final String choice3;
   final String title;
   final Function onSatusSelect;
-  const StatusDialogContent(
-      {super.key,
-      required this.onSatusSelect,
-      required this.choice1,
-      required this.choice2,
-      this.choice3 = '',
-      required this.title});
+  const StatusDialogContent({
+    super.key,
+    required this.onSatusSelect,
+    required this.choice1,
+    required this.choice2,
+    this.choice3 = '',
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -400,10 +408,7 @@ class StatusDialogContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: boldTextStyle(size: 17),
-              ),
+              Text(title, style: boldTextStyle(size: 17)),
               vSpace(12),
               InkWell(
                 onTap: () => onSatusSelect(1),
@@ -415,10 +420,7 @@ class StatusDialogContent extends StatelessWidget {
                       height: 24,
                     ),
                     hSpace(8),
-                    Text(
-                      choice1,
-                      style: boldTextStyle(size: 14),
-                    ),
+                    Text(choice1, style: boldTextStyle(size: 14)),
                   ],
                 ),
               ),
@@ -435,10 +437,7 @@ class StatusDialogContent extends StatelessWidget {
                       height: 24,
                     ),
                     hSpace(8),
-                    Text(
-                      choice2,
-                      style: boldTextStyle(size: 14),
-                    ),
+                    Text(choice2, style: boldTextStyle(size: 14)),
                   ],
                 ),
               ),
@@ -455,10 +454,7 @@ class StatusDialogContent extends StatelessWidget {
                         height: 24,
                       ),
                       hSpace(8),
-                      Text(
-                        choice3,
-                        style: boldTextStyle(size: 14),
-                      ),
+                      Text(choice3, style: boldTextStyle(size: 14)),
                     ],
                   ),
                 ),

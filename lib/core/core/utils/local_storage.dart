@@ -1,5 +1,5 @@
-import 'package:haretna/core/utils/app_constants.dart';
-import 'package:haretna/core/utils/common_method.dart';
+import '../../core/utils/app_constants.dart';
+import '../../core/utils/common_method.dart';
 
 class LocalStorage {
   LocalStorage._();
@@ -20,13 +20,17 @@ class LocalStorage {
   }); */
   //LocalStorage({required this.prefs});
   /// Write
-  static Future<bool> saveStringToDisk(
-      {required String key, required String value}) async {
+  static Future<bool> saveStringToDisk({
+    required String key,
+    required String value,
+  }) async {
     return await preferences!.setString(key, value);
   }
 
-  static Future<bool> saveBoolToDisk(
-      {required String key, required bool value}) async {
+  static Future<bool> saveBoolToDisk({
+    required String key,
+    required bool value,
+  }) async {
     return await preferences!.setBool(key, value);
   }
 
