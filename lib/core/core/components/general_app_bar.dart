@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:haretna/core/assets/icons/icons.dart';
-import 'package:haretna/core/components/back_button_widget.dart';
-import 'package:haretna/core/components/custom_image.dart';
-import 'package:haretna/core/components/notification_widget.dart';
-import 'package:haretna/core/theme/colors.dart';
-import 'package:haretna/core/utils/app_constants.dart';
-import 'package:haretna/core/utils/extensions/app_common.dart';
-import 'package:haretna/core/utils/size_utils.dart';
+import '../../core/assets/icons/icons.dart';
+import '../../core/components/back_button_widget.dart';
+import '../../core/components/custom_image.dart';
+import '../../core/components/notification_widget.dart';
+import '../../core/theme/colors.dart';
+import '../../core/utils/app_constants.dart';
+import '../../core/utils/extensions/app_common.dart';
+import '../../core/utils/size_utils.dart';
 
 class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
@@ -42,9 +42,7 @@ class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style: boldTextStyle(color: AppColors.whiteColor, size: 18.adaptSize),
       ),
-      actions: [
-        if (withNotification) NotificationWidget(),
-      ],
+      actions: [if (withNotification) NotificationWidget()],
 
       flexibleSpace: Container(
         decoration: BoxDecoration(

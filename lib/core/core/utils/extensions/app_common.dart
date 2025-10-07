@@ -10,9 +10,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:haretna/core/utils/app_constants.dart';
-import 'package:haretna/core/utils/extensions/boolean_extension.dart';
-import 'package:haretna/core/utils/size_utils.dart';
+import '../..//utils/app_constants.dart';
+import '../..//utils/extensions/boolean_extension.dart';
+import '../..//utils/size_utils.dart';
 
 import '../../enums/toast_enum.dart';
 import '../../theme/colors.dart';
@@ -39,14 +39,8 @@ InputDecoration inputDecoration(
     suffixIcon: suffixIcon,
 
     hintText: hintText ?? "",
-    prefixIconConstraints: const BoxConstraints(
-      minWidth: 24,
-      minHeight: 24,
-    ),
-    suffixIconConstraints: const BoxConstraints(
-      minWidth: 24,
-      minHeight: 24,
-    ),
+    prefixIconConstraints: const BoxConstraints(minWidth: 24, minHeight: 24),
+    suffixIconConstraints: const BoxConstraints(minWidth: 24, minHeight: 24),
     //contentPadding: EdgeInsets.only(bottom: 8),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
@@ -77,10 +71,12 @@ InputDecoration inputDecoration(
       ),
     ),
     enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
-        borderSide: BorderSide(
-            color: borderColor ?? AppColors.gray4Color,
-            width: borderWidth ?? 1)),
+      borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
+      borderSide: BorderSide(
+        color: borderColor ?? AppColors.gray4Color,
+        width: borderWidth ?? 1,
+      ),
+    ),
     alignLabelWithHint: true,
     floatingLabelBehavior: floatingLable.validate()
         ? FloatingLabelBehavior.always
@@ -95,8 +91,12 @@ InputDecoration inputDecoration(
   );
 }
 
-TextStyle boldTextStyle(
-    {double? size, Color? color, FontWeight? weight, double? height}) {
+TextStyle boldTextStyle({
+  double? size,
+  Color? color,
+  FontWeight? weight,
+  double? height,
+}) {
   return TextStyle(
     fontSize: size ?? textBoldSizeGlobal,
     color: color ?? textPrimaryColorGlobal,
@@ -105,8 +105,12 @@ TextStyle boldTextStyle(
   );
 }
 
-TextStyle normalTextStyle(
-    {double? size, Color? color, FontWeight? weight, double? height}) {
+TextStyle normalTextStyle({
+  double? size,
+  Color? color,
+  FontWeight? weight,
+  double? height,
+}) {
   return TextStyle(
     fontSize: size ?? textBoldSizeGlobal,
     color: color ?? textPrimaryColorGlobal,
@@ -115,8 +119,12 @@ TextStyle normalTextStyle(
   );
 }
 
-TextStyle primaryTextFeildTextStyle(
-    {double? size, Color? color, FontWeight? weight, double? height}) {
+TextStyle primaryTextFeildTextStyle({
+  double? size,
+  Color? color,
+  FontWeight? weight,
+  double? height,
+}) {
   return TextStyle(
     fontSize: size ?? textPrimarySizeGlobal,
     color: color ?? textPrimaryColorGlobal,
@@ -126,8 +134,12 @@ TextStyle primaryTextFeildTextStyle(
 }
 
 // Primary Text Style
-TextStyle primaryTextStyle(
-    {double? size, Color? color, FontWeight? weight, double? height}) {
+TextStyle primaryTextStyle({
+  double? size,
+  Color? color,
+  FontWeight? weight,
+  double? height,
+}) {
   return TextStyle(
     fontSize: size ?? textPrimarySizeGlobal,
     color: color ?? textPrimaryColorGlobal,
@@ -137,8 +149,12 @@ TextStyle primaryTextStyle(
 }
 
 // Secondary Text Style
-TextStyle secondaryTextStyle(
-    {double? size, Color? color, FontWeight? weight, double? height}) {
+TextStyle secondaryTextStyle({
+  double? size,
+  Color? color,
+  FontWeight? weight,
+  double? height,
+}) {
   return TextStyle(
     fontSize: size ?? textSecondarySizeGlobal,
     color: color ?? textSecondaryColorGlobal,
@@ -149,8 +165,10 @@ TextStyle secondaryTextStyle(
 
 String getDateFormat(String? date) {
   if (date != null && date.isNotEmpty) {
-    return DateFormat('dd MMM yyyy - hh:mm a', Get.locale?.languageCode)
-        .format(DateTime.parse(date).toLocal());
+    return DateFormat(
+      'dd MMM yyyy - hh:mm a',
+      Get.locale?.languageCode,
+    ).format(DateTime.parse(date).toLocal());
   } else {
     return '';
   }
@@ -158,15 +176,19 @@ String getDateFormat(String? date) {
 
 String getDateFormatDateOnly(String? date) {
   if (date != null && date.isNotEmpty) {
-    return DateFormat('dd MMM yyyy ', Get.locale?.languageCode)
-        .format(DateTime.parse(date).toLocal());
+    return DateFormat(
+      'dd MMM yyyy ',
+      Get.locale?.languageCode,
+    ).format(DateTime.parse(date).toLocal());
   } else {
     return '';
   }
 }
 
-var outputFormat =
-    DateFormat('dd MMM yyyy - hh:mm a', Get.locale?.languageCode);
+var outputFormat = DateFormat(
+  'dd MMM yyyy - hh:mm a',
+  Get.locale?.languageCode,
+);
 
 void log(final value) {
   if (!kReleaseMode) dev.log('$value');
@@ -176,8 +198,10 @@ bool hasMatch(String? s, String p) {
   return (s == null) ? false : RegExp(p).hasMatch(s);
 }
 
-Color getColorFromHex(String hexColor,
-    {Color defaultColor = AppColors.orangColor}) {
+Color getColorFromHex(
+  String hexColor, {
+  Color defaultColor = AppColors.orangColor,
+}) {
   if (hexColor.isEmpty) {
     return defaultColor;
   }
@@ -195,12 +219,14 @@ Color getColorFromHex(String hexColor,
   }
 }
 
-void toast(String? value,
-    {ToastGravity? gravity,
-    length = Toast.LENGTH_SHORT,
-    Color? bgColor,
-    Color? textColor,
-    bool print = false}) {
+void toast(
+  String? value, {
+  ToastGravity? gravity,
+  length = Toast.LENGTH_SHORT,
+  Color? bgColor,
+  Color? textColor,
+  bool print = false,
+}) {
   if (value!.isEmpty || (!kIsWeb && Platform.isLinux)) {
     log(value);
   } else {
@@ -217,19 +243,22 @@ void toast(String? value,
 }
 
 /// Launch a new screen
-Future<T?> launchScreen<T>(BuildContext context, Widget child,
-    {bool isNewTask = false,
-    PageRouteAnimation? pageRouteAnimation,
-    Duration? duration}) async {
+Future<T?> launchScreen<T>(
+  BuildContext context,
+  Widget child, {
+  bool isNewTask = false,
+  PageRouteAnimation? pageRouteAnimation,
+  Duration? duration,
+}) async {
   if (isNewTask) {
     return await Navigator.of(context).pushAndRemoveUntil(
       buildPageRoute(child, pageRouteAnimation, duration),
       (route) => false,
     );
   } else {
-    return await Navigator.of(context).push(
-      buildPageRoute(child, pageRouteAnimation, duration),
-    );
+    return await Navigator.of(
+      context,
+    ).push(buildPageRoute(child, pageRouteAnimation, duration));
   }
 }
 
@@ -237,7 +266,10 @@ Future<T?> launchScreen<T>(BuildContext context, Widget child,
 enum PageRouteAnimation { Fade, Scale, Rotate, Slide, SlideBottomTop }
 
 Route<T> buildPageRoute<T>(
-    Widget? child, PageRouteAnimation? pageRouteAnimation, Duration? duration) {
+  Widget? child,
+  PageRouteAnimation? pageRouteAnimation,
+  Duration? duration,
+) {
   if (pageRouteAnimation != null) {
     if (pageRouteAnimation == PageRouteAnimation.Fade) {
       return PageRouteBuilder(
@@ -264,9 +296,10 @@ Route<T> buildPageRoute<T>(
       return PageRouteBuilder(
         pageBuilder: (c, a1, a2) => child!,
         transitionsBuilder: (c, anim, a2, child) => SlideTransition(
-          position:
-              Tween(begin: const Offset(1.0, 0.0), end: const Offset(0.0, 0.0))
-                  .animate(anim),
+          position: Tween(
+            begin: const Offset(1.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ).animate(anim),
           child: child,
         ),
         transitionDuration: const Duration(milliseconds: 500),
@@ -275,9 +308,10 @@ Route<T> buildPageRoute<T>(
       return PageRouteBuilder(
         pageBuilder: (c, a1, a2) => child!,
         transitionsBuilder: (c, anim, a2, child) => SlideTransition(
-          position:
-              Tween(begin: const Offset(0.0, 1.0), end: const Offset(0.0, 0.0))
-                  .animate(anim),
+          position: Tween(
+            begin: const Offset(0.0, 1.0),
+            end: const Offset(0.0, 0.0),
+          ).animate(anim),
           child: child,
         ),
         transitionDuration: const Duration(milliseconds: 500),
@@ -320,16 +354,18 @@ BorderRadius radius([double? radius]) {
 }
 
 /// returns Radius
-BorderRadius radiusOnly(
-    {double? topLeft,
-    double? topRight,
-    double? bottomLeft,
-    double? bottomRight}) {
+BorderRadius radiusOnly({
+  double? topLeft,
+  double? topRight,
+  double? bottomLeft,
+  double? bottomRight,
+}) {
   return BorderRadius.only(
-      bottomLeft: Radius.circular(bottomLeft ?? 0),
-      bottomRight: Radius.circular(bottomRight ?? 0),
-      topLeft: Radius.circular(topLeft ?? 0),
-      topRight: Radius.circular(topRight ?? 0));
+    bottomLeft: Radius.circular(bottomLeft ?? 0),
+    bottomRight: Radius.circular(bottomRight ?? 0),
+    topLeft: Radius.circular(topLeft ?? 0),
+    topRight: Radius.circular(topRight ?? 0),
+  );
 }
 
 /// returns Radius
@@ -338,25 +374,20 @@ Radius radiusCircular([double? radius]) {
 }
 
 vSpace(double height) {
-  return SizedBox(
-    height: height,
-  );
+  return SizedBox(height: height);
 }
 
 hSpace(double width) {
-  return SizedBox(
-    width: width,
-  );
+  return SizedBox(width: width);
 }
 
-Widget svgImage(
-    {required String name, double? width, double? height, Color? color}) {
-  return SvgPicture.asset(
-    name,
-    width: width,
-    height: height,
-    color: color,
-  );
+Widget svgImage({
+  required String name,
+  double? width,
+  double? height,
+  Color? color,
+}) {
+  return SvgPicture.asset(name, width: width, height: height, color: color);
 }
 
 EdgeInsets dynamicAppButtonPadding(BuildContext context) {
@@ -385,11 +416,12 @@ Widget commonCachedNetworkImage(
 }) {
   if (url != null && url.isEmpty) {
     return placeHolderWidget(
-        height: height,
-        width: width,
-        fit: fit,
-        alignment: alignment,
-        radius: radius);
+      height: height,
+      width: width,
+      fit: fit,
+      alignment: alignment,
+      radius: radius,
+    );
   } else if (url.validate().startsWith('http')) {
     return CachedNetworkImage(
       imageUrl: url!,
@@ -400,42 +432,49 @@ Widget commonCachedNetworkImage(
       alignment: alignment as Alignment? ?? Alignment.center,
       errorWidget: (_, s, d) {
         return placeHolderWidget(
-            height: height,
-            width: width,
-            fit: fit,
-            alignment: alignment,
-            radius: radius);
+          height: height,
+          width: width,
+          fit: fit,
+          alignment: alignment,
+          radius: radius,
+        );
       },
       placeholder: (_, s) {
         if (!usePlaceholderIfUrlEmpty) return const SizedBox();
         return placeHolderWidget(
-            height: height,
-            width: width,
-            fit: fit,
-            alignment: alignment,
-            radius: radius);
+          height: height,
+          width: width,
+          fit: fit,
+          alignment: alignment,
+          radius: radius,
+        );
       },
     );
   } else {
-    return Image.network(url!,
-        height: height,
-        width: width,
-        fit: fit,
-        alignment: alignment ?? Alignment.center);
+    return Image.network(
+      url!,
+      height: height,
+      width: width,
+      fit: fit,
+      alignment: alignment ?? Alignment.center,
+    );
   }
 }
 
-Widget placeHolderWidget(
-    {double? height,
-    double? width,
-    BoxFit? fit,
-    AlignmentGeometry? alignment,
-    double? radius}) {
-  return Image.asset(placeholderImage,
-      height: height,
-      width: width,
-      fit: fit ?? BoxFit.cover,
-      alignment: alignment ?? Alignment.center);
+Widget placeHolderWidget({
+  double? height,
+  double? width,
+  BoxFit? fit,
+  AlignmentGeometry? alignment,
+  double? radius,
+}) {
+  return Image.asset(
+    placeholderImage,
+    height: height,
+    width: width,
+    fit: fit ?? BoxFit.cover,
+    alignment: alignment ?? Alignment.center,
+  );
 }
 
 Future<dynamic> showAppBottomSheet({
@@ -446,13 +485,12 @@ Future<dynamic> showAppBottomSheet({
   final data = await showModalBottomSheet<dynamic>(
     isDismissible: isDismissible,
     isScrollControlled: true,
-    constraints: BoxConstraints(
-      maxHeight: Get.height * 0.5,
-    ),
+    constraints: BoxConstraints(maxHeight: Get.height * 0.5),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(defaultRadius),
-          topRight: Radius.circular(defaultRadius)),
+        topLeft: Radius.circular(defaultRadius),
+        topRight: Radius.circular(defaultRadius),
+      ),
     ),
     context: context,
     builder: (_) {
@@ -491,11 +529,14 @@ String getRandom(int length) {
   const ch = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
   Random r = Random();
   return String.fromCharCodes(
-      Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
+    Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))),
+  );
 }
 
-Future<DateTime?> dateTimePicker(BuildContext context,
-    {TimeOfDay? timeOfday}) async {
+Future<DateTime?> dateTimePicker(
+  BuildContext context, {
+  TimeOfDay? timeOfday,
+}) async {
   DateTime? date = await pickDate(context);
   if (date == null) return null;
 
@@ -514,14 +555,11 @@ Future<DateTime?> dateTimePicker(BuildContext context,
 }
 
 Future<DateTime?> pickDate(BuildContext context) => showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
+  context: context,
+  initialDate: DateTime.now(),
+  firstDate: DateTime(1900),
+  lastDate: DateTime(2100),
+);
 
 Future<TimeOfDay?> pickTime(BuildContext context, {TimeOfDay? timeOfday}) =>
-    showTimePicker(
-      context: context,
-      initialTime: timeOfday ?? TimeOfDay.now(),
-    );
+    showTimePicker(context: context, initialTime: timeOfday ?? TimeOfDay.now());
