@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 
 import 'payment_success_screen.dart';
 
@@ -13,8 +14,8 @@ class PaymentVisaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.appColor,
+        foregroundColor: AppColors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,12 +49,12 @@ class PaymentVisaScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.appColor,
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text(
                 'Pay EGP 57',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: AppColors.white, fontSize: 18),
               ),
             ),
           ],

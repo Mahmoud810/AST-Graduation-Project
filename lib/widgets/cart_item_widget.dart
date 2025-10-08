@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:graduation_project/constants.dart';
 import '../models/cart_item_model.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -38,7 +38,7 @@ class CartItemWidget extends StatelessWidget {
           ],
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.delete, color: Colors.red),
+          icon: const Icon(Icons.delete, color: AppColors.red),
           onPressed: onDelete,
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
   const PaymentSuccessScreen({super.key});
@@ -6,12 +7,12 @@ class PaymentSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.check_circle, color: Colors.blue, size: 80),
+            const Icon(Icons.check_circle, color: AppColors.appColor, size: 80),
             const SizedBox(height: 20),
             const Text(
               'Thank You For Ordering',
@@ -24,7 +25,7 @@ class PaymentSuccessScreen extends StatelessWidget {
               onPressed: () =>
                   Navigator.popUntil(context, (route) => route.isFirst),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.appColor,
                 minimumSize: const Size(200, 50),
               ),
               child: const Text(
@@ -32,7 +33,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ),

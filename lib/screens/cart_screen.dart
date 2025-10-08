@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 
 import '../models/cart_item_model.dart';
 import '../widgets/cart_item_widget.dart';
@@ -40,8 +41,8 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Cart'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.appColor,
+        foregroundColor: AppColors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
                   ? const Center(
                       child: Text(
                         'Your cart is empty.',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                        style: TextStyle(fontSize: 18, color: AppColors.grey),
                       ),
                     )
                   : ListView.builder(
@@ -105,8 +106,10 @@ class _CartScreenState extends State<CartScreen> {
                       );
                     },
               style: ElevatedButton.styleFrom(
-                backgroundColor: isCartEmpty ? Colors.grey : Colors.blue,
-                foregroundColor: Colors.white,
+                backgroundColor: isCartEmpty
+                    ? AppColors.grey
+                    : AppColors.appColor,
+                foregroundColor: AppColors.white,
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text('Check Out', style: TextStyle(fontSize: 18)),

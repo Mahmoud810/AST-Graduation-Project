@@ -19,10 +19,9 @@ class BaseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Body background
+      backgroundColor: AppColors.white, // Body background
       body: Column(
         children: [
-          // 🟩 Green Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.only(
@@ -32,7 +31,7 @@ class BaseView extends StatelessWidget {
               bottom: 16,
             ),
             decoration: const BoxDecoration(
-              color: Colors.blue, // Green background like in the image
+              color: AppColors.appColor, // Green background like in the image
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -48,13 +47,13 @@ class BaseView extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.menu, color: Colors.white),
+                          icon: const Icon(Icons.menu, color: AppColors.white),
                           onPressed: () {},
                         ),
                         Text(
                           title,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -63,7 +62,7 @@ class BaseView extends StatelessWidget {
                     ),
                     Row(
                       children: const [
-                        Icon(Icons.notifications_none, color: Colors.white),
+                        Icon(Icons.notifications_none, color: AppColors.white),
                       ],
                     ),
                   ],
@@ -97,7 +96,7 @@ class BaseView extends StatelessWidget {
                     const SizedBox(width: 10),
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: AppColors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: IconButton(

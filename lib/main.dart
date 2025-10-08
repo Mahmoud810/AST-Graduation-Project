@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/screens/cart_screen.dart';
+import 'constants.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,7 +15,10 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: "Graduation Project",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primaryColor: AppColors.appColor,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.appColor),
+      ),
       home: CartScreen(),
     );
   }

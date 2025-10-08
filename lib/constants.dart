@@ -2,8 +2,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color appColor = Color(0xFF006A3D); // your main green color
+  // AppColors._(); // this basically makes it so you can instantiate this class
+  static const Color appColor = Color(0xFF000095); // your main green color
   static const Color textDark = Color(0xFF333333);
   static const Color textHint = Color(0xFFB0B0B0);
   static const Color white = Colors.white;
+  static const Color red = Colors.red;
+  static const Color grey = Colors.grey;
 }

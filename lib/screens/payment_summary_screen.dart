@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart' show AppColors;
 
 import 'add_address_screen.dart';
 import 'payment_success_screen.dart';
@@ -25,8 +26,8 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.appColor,
+        foregroundColor: AppColors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,7 +41,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
             const SizedBox(height: 4),
             const Text(
               'All transactions are secure and encrypted.',
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: AppColors.grey),
             ),
             const SizedBox(height: 20),
 
@@ -102,8 +103,8 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
             // 🔹 Confirm Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.appColor,
+                foregroundColor: AppColors.white,
                 minimumSize: const Size(double.infinity, 50),
               ),
               onPressed: () async {
@@ -155,7 +156,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedPayment == value
-                ? Colors.blue
+                ? AppColors.appColor
                 : Colors.grey.shade300,
             width: 2,
           ),
@@ -167,7 +168,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
               value: value!,
               groupValue: selectedPayment,
               onChanged: (val) => setState(() => selectedPayment = val!),
-              activeColor: Colors.blue,
+              activeColor: AppColors.appColor,
             ),
             Expanded(
               child: Column(
@@ -178,7 +179,10 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   if (subtitle != null)
-                    Text(subtitle, style: const TextStyle(color: Colors.grey)),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(color: AppColors.grey),
+                    ),
                 ],
               ),
             ),
@@ -195,7 +199,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
       groupValue: selectedAddressOption,
       onChanged: (val) => setState(() => selectedAddressOption = val!),
       title: Text(label),
-      activeColor: Colors.blue,
+      activeColor: AppColors.appColor,
       contentPadding: EdgeInsets.zero,
     );
   }

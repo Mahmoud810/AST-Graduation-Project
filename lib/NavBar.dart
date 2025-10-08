@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+// import 'package:graduation_project/core/core/theme/colors.dart';
+import 'package:graduation_project/constants.dart';
 
 import 'screens/home.dart';
 
-const Color appColor = Colors.blue; // Define your app color here
+// const Color AppColors.appbarColor = Colors.blue; // Define your app color here
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -29,7 +31,10 @@ class _NavBarState extends State<NavBar> {
 
   BottomNavigationBarItem buildNavItem(IconData icon, String label, int index) {
     return BottomNavigationBarItem(
-      icon: Icon(icon, color: _selectedIndex == index ? appColor : Colors.grey),
+      icon: Icon(
+        icon,
+        color: _selectedIndex == index ? AppColors.appColor : AppColors.grey,
+      ),
       label: label,
     );
   }
@@ -42,8 +47,8 @@ class _NavBarState extends State<NavBar> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: appColor,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: AppColors.appColor,
+        unselectedItemColor: AppColors.grey,
         items: [
           buildNavItem(Icons.home, "", 0),
           buildNavItem(Icons.search, "", 1), // Added second item

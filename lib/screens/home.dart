@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 import 'baseview.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,11 +22,11 @@ class HomeScreen extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) => Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: AppColors.grey.withOpacity(0.2),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),

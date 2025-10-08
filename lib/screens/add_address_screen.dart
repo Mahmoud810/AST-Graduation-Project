@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/constants.dart';
 
 class AddAddressScreen extends StatefulWidget {
   const AddAddressScreen({super.key});
@@ -45,8 +46,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Billing Address'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.appColor,
+        foregroundColor: AppColors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -72,8 +73,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               const Spacer(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isButtonEnabled ? Colors.blue : Colors.grey,
-                  foregroundColor: Colors.white,
+                  backgroundColor: isButtonEnabled
+                      ? AppColors.appColor
+                      : AppColors.grey,
+                  foregroundColor: AppColors.white,
                   minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: isButtonEnabled
