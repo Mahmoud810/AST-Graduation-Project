@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'screens/home.dart';
 
-const Color appColor = Color(0xFF006A3D); // Define your app color here
+const Color appColor = Colors.blue; // Define your app color here
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});

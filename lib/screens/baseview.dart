@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../constants.dart';
 
 class BaseView extends StatelessWidget {
@@ -31,7 +32,7 @@ class BaseView extends StatelessWidget {
               bottom: 16,
             ),
             decoration: const BoxDecoration(
-              color: Color(0xFF006A3D), // Green background like in the image
+              color: Colors.blue, // Green background like in the image
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home.dart'; // Create this file
-import 'navBar.dart'; // Create this file
-import 'package:supabase_auth_ui/supabase_auth_ui.dart'; // Example of another import
+import 'package:graduation_project/screens/cart_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +14,7 @@ class MainApp extends StatelessWidget {
       title: "Graduation Project",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const NavBar(),
+      home: CartScreen(),
     );
   }
 }
