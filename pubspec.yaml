@@ -37,7 +37,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/screens/home.png
+    - assets/Screens/home.png
+    - assets/Screens/heart.png
+    - assets/Screens/gift.png
+    - assets/Screens/sheet-plastic.png
     - assets/product.jpg
     - assets/filterIcon.png
 flutter_assets:

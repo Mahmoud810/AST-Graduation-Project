@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/NavBar.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/screens/cart_screen.dart';
 import 'constants.dart';
@@ -19,7 +20,7 @@ class MainApp extends StatelessWidget {
         primaryColor: AppColors.appColor,
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.appColor),
       ),
-      home: CartScreen(),
+      home: NavBar(),
     );
   }
 }
