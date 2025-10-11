@@ -40,3 +40,9 @@ flutter:
     - assets/screens/home.png
     - assets/product.jpg
     - assets/filterIcon.png
+flutter_assets:
+  assets_path: assets/
+  output_path: lib/core/core/assets/genImages/
+  filename: imageAssets.dart
+  field_prefix: resource
+  ignore_comments: true
