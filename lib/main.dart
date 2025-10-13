@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/NavBar.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/screens/cart_screen.dart';
-import 'constants.dart';
+
+import 'NavBar.dart';
 
 void main() {
   runApp(const MainApp());

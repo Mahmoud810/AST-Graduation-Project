@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../constants.dart';
 
 class BaseBackView extends StatelessWidget {
@@ -18,13 +19,13 @@ class BaseBackView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double overlapAmount = 24.0;
-    const double navigationRowHeight = 44.0;
+    const double navigationRowHeight = 20.0;
     const double titleRowHeight = 30.0;
     const double verticalSpacing =
-        20.0; // Spacing between navigation row and title
-    const double topContentPadding = 20.0;
+        5.0; // Spacing between navigation row and title
+    const double topContentPadding = 10.0;
     const double bottomContentPadding =
-        50.0; // INCREASE THIS for more spacing after the title/header content
+        32.0; // INCREASE THIS for more spacing after the title/header content
 
     // Calculate the total height required for the header content area (Navigation + Spacing + Title)
     final double contentAreaHeight =
@@ -76,24 +77,26 @@ class BaseBackView extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.arrow_back_ios_new,
-                                    color: AppColors.white,
-                                    size: 22,
+                                    color: AppColors
+                                        .white, // make the icon match your app color
+                                    size: 20,
                                   ),
                                   onPressed:
                                       onBackPressed ??
                                       () => Navigator.pop(context),
-                                  padding: EdgeInsets.zero,
+                                  padding: const EdgeInsets.all(8),
                                   constraints: const BoxConstraints(),
                                 ),
-                                const Text(
-                                  'Back',
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
+
+                                // const Text(
+                                //   'Back',
+                                //   style: TextStyle(
+                                //     color: AppColors.white,
+                                //     fontSize: 18,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

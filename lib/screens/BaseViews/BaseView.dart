@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../constants.dart';
 
 class BaseView extends StatelessWidget {
   final String title;
   final Widget body;
   final bool isContainSearch;
-  final VoidCallback? onFilterPressed;
+  final VoidCallback? onCartPressed;
   final ValueChanged<String>? onSearchChanged;
   final VoidCallback? onMenuPressed;
   final VoidCallback? onNotificationPressed;
@@ -14,7 +15,7 @@ class BaseView extends StatelessWidget {
     super.key,
     required this.title,
     required this.body,
-    this.onFilterPressed,
+    this.onCartPressed,
     this.onSearchChanged,
     this.onMenuPressed,
     this.onNotificationPressed,
@@ -147,26 +148,53 @@ class BaseView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: horizontalSpacing),
-                        Container(
-                          height: componentHeight,
-                          width: componentHeight,
-                          decoration: BoxDecoration(
-                            color: AppColors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: IconButton(
-                            icon: Image.asset(
-                              "assets/filterIcon.png",
-                              color: AppColors.white,
-                              height: 24,
-                            ),
-                            onPressed: onFilterPressed,
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints.tightFor(
-                              width: componentHeight,
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            Container(
                               height: componentHeight,
+                              width: componentHeight,
+                              decoration: BoxDecoration(
+                                color: AppColors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: AppColors.white,
+                                  size: 24,
+                                ),
+                                onPressed:
+                                    onCartPressed, // same as cart navigation
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints.tightFor(
+                                  width: componentHeight,
+                                  height: componentHeight,
+                                ),
+                              ),
                             ),
-                          ),
+
+                            // 🔴 Badge
+                            Positioned(
+                              right: 6,
+                              top: 6,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: AppColors.red,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Text(
+                                  '0', // TODO: make dynamic later
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
