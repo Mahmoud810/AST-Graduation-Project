@@ -54,7 +54,7 @@ class BaseView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: Stack(
         children: [
-          // --- Header (Green Section) ---
+          // --- Header (blue Section) ---
           Positioned(
             top: 0,
             left: 0,
