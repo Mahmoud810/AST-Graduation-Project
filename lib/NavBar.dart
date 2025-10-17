@@ -4,7 +4,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/core/core/assets/genImages/imageAssets.dart';
 import 'screens/NavBar/HomeScreen.dart';
 import 'screens/NavBar/GiftScreen.dart';
-import 'screens/NavBar/FavouriteScreen.dart';
+import 'screens/NavBar/Favourite/FavouriteScreen.dart';
 import 'screens/NavBar/UploadScreen.dart';
 // const Color AppColors.appbarColor = Colors.blue; // Define your app color here
 
