@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
 
 import 'payment_success_screen.dart';
 
@@ -11,17 +13,15 @@ class PaymentVisaScreen extends StatelessWidget {
     final TextEditingController cardNumController = TextEditingController();
     final TextEditingController nameController = TextEditingController();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment'),
-        backgroundColor: AppColors.appColor,
-        foregroundColor: AppColors.white,
-      ),
+    return BaseBackView(
+      title: "Payment",
+      onBackPressed: () => Navigator.pop(context),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Image.network(
+            SvgPicture.network(
               'https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg',
               width: 100,
               height: 60,

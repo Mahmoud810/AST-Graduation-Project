@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart' show AppColors;
+import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
 
 import 'add_address_screen.dart';
 import 'payment_success_screen.dart';
@@ -23,12 +24,10 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
     double deliveryFee = 20;
     double total = widget.subtotal + deliveryFee;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment'),
-        backgroundColor: AppColors.appColor,
-        foregroundColor: AppColors.white,
-      ),
+    return BaseBackView(
+      title: "Payment",
+      onBackPressed: () => Navigator.pop(context),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

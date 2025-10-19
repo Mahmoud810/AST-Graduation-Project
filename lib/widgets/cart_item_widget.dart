@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+
 import '../models/cart_item_model.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -18,7 +19,7 @@ class CartItemWidget extends StatelessWidget {
           height: 60,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(
+            child: Image.asset(
               item.imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) =>

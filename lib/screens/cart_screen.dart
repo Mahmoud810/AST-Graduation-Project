@@ -1,36 +1,32 @@
+// cart_screen.dart
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
 
 import '../models/cart_item_model.dart';
 import '../widgets/cart_item_widget.dart';
 import 'payment_summary_screen.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  final List<CartItem> cartItems;
+
+  const CartScreen({super.key, required this.cartItems});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<CartItem> cartItems = [
-    CartItem(
-      title: 'Binta Shampoo',
-      imageUrl: 'assets/product.jpg',
-      quantity: 3,
-      price: 30,
-    ),
-    CartItem(
-      title: 'Binta Conditioner',
-      imageUrl: 'assets/product.jpg',
-      quantity: 2,
-      price: 27.5,
-    ),
-  ];
+  late List<CartItem> cartItems;
+
+  @override
+  void initState() {
+    super.initState();
+    cartItems = List.from(widget.cartItems); // clone list
+  }
 
   @override
   Widget build(BuildContext context) {
-    //Correct total: includes quantity
     final double total = cartItems.fold(
       0,
       (sum, item) => sum + (item.price * item.quantity),
@@ -38,17 +34,26 @@ class _CartScreenState extends State<CartScreen> {
 
     final bool isCartEmpty = cartItems.isEmpty || total == 0;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Cart'),
-        backgroundColor: AppColors.appColor,
-        foregroundColor: AppColors.white,
-      ),
+    return BaseBackView(
+      title: 'My Cart',
+      onBackPressed: () => Navigator.pop(context),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Display empty message or cart items
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                cartItems.isEmpty
+                    ? 'Your cart is empty'
+                    : 'You have ${cartItems.length} item${cartItems.length > 1 ? 's' : ''} in cart',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             Expanded(
               child: cartItems.isEmpty
                   ? const Center(
@@ -72,8 +77,6 @@ class _CartScreenState extends State<CartScreen> {
                     ),
             ),
             const Divider(),
-
-            // Total Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -90,10 +93,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ],
             ),
-
             const SizedBox(height: 10),
-
-            // ✅ Checkout button (disabled if cart empty)
             ElevatedButton(
               onPressed: isCartEmpty
                   ? null

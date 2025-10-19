@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "538056277715",
+    "project_id": "online-pharmacy-ed15c",
+    "storage_bucket": "online-pharmacy-ed15c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538056277715:android:be0d5f3f5300d324969e26",
+        "android_client_info": {
+          "package_name": "com.example.graduation_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmCM4aufpgSILOGvuew5Ggw5UW6A2ziXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
