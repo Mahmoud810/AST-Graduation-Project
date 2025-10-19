@@ -40,6 +40,7 @@ flutter:
     - assets/screens/home.png
     - assets/product.jpg
     - assets/filterIcon.png
+    - assets/
 flutter_assets:
   assets_path: assets/
   output_path: lib/core/core/assets/genImages/

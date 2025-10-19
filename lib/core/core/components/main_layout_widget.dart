@@ -26,7 +26,7 @@ class MainLayoutWidget extends StatelessWidget {
   final bool extendBodyBehindAppBar;
 
   const MainLayoutWidget({
-    Key? key,
+    super.key,
     required this.widget,
     this.bottomWidget,
     this.backGroundColor,
@@ -45,7 +45,7 @@ class MainLayoutWidget extends StatelessWidget {
     this.backgroundWidget,
     this.extendBodyBehindAppBar = false,
     this.floatingButton,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class MainLayoutWidget extends StatelessWidget {
       child: WillPopScope(
         onWillPop: onWillPop,
         child: Scaffold(
-            appBar: appBar != null ? appBar! : null,
+            appBar: appBar,
             drawer: drawer,
             bottomNavigationBar: bottomWidget,
             extendBodyBehindAppBar: extendBodyBehindAppBar,
@@ -107,7 +107,7 @@ class MainLayoutWidget extends StatelessWidget {
 
 class IsScrollable extends StatelessWidget {
   const IsScrollable({
-    Key? key,
+    super.key,
     required this.scrollController,
     required this.minHeight,
     required this.widthMargin,
@@ -117,7 +117,7 @@ class IsScrollable extends StatelessWidget {
     required this.isScrollable,
     required this.onRefresh,
     required this.maxHeight,
-  }) : super(key: key);
+  });
 
   final bool isScrollable;
   final ScrollController? scrollController;
@@ -178,14 +178,14 @@ class IsScrollable extends StatelessWidget {
 
 class MainBodyWidget extends StatelessWidget {
   const MainBodyWidget({
-    Key? key,
+    super.key,
     required this.minHeight,
     required this.widthMargin,
     required this.heightMargin,
     required this.widget,
     required this.isSafeArea,
     required this.maxHeight,
-  }) : super(key: key);
+  });
 
   final double? minHeight;
   final double widthMargin;

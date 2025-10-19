@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../utils/common_method.dart';
 import '../utils/extensions/app_common.dart';
-import '../utils/size_utils.dart';
 
 import '../assets/icons/icons.dart';
 import '../services/navigation_handler.dart';

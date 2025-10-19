@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/assets/icons/icons.dart';
 import '../../core/components/back_button_widget.dart';
-import '../../core/components/custom_image.dart';
 import '../../core/components/notification_widget.dart';
 import '../../core/theme/colors.dart';
 import '../../core/utils/app_constants.dart';

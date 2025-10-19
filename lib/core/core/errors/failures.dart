@@ -70,13 +70,15 @@ class ServerFailure extends Failure {
         Map<String, dynamic> messages = response['validation'];
         List messagesList = messages.values.toList();
         for (int i = 0; i < messagesList.length; i++) {
-          if (i == 0)
+          if (i == 0) {
             errorMessage += messagesList[i];
-          else
+          } else {
             errorMessage += '\n${messagesList[i]}';
+          }
         }
-      } else
+      } else {
         errorMessage = response['message'];
+      }
       return ServerFailure(errorMessage);
     } else if (statusCode == 401) {
       //if(Get.currentRoute != "/LoginInPageView")
@@ -88,13 +90,15 @@ class ServerFailure extends Failure {
         Map<String, dynamic> messages = response['validation'];
         List messagesList = messages.values.toList();
         for (int i = 0; i < messagesList.length; i++) {
-          if (i == 0)
+          if (i == 0) {
             errorMessage += messagesList[i];
-          else
+          } else {
             errorMessage += '\n${messagesList[i]}';
+          }
         }
-      } else
+      } else {
         errorMessage = response['message'];
+      }
       return ServerFailure(errorMessage);
     } else if (statusCode == 404) {
       return ServerFailure('Your request not found, Please try later!');

@@ -27,13 +27,13 @@ extension StringExtension on String? {
       (this != null && this! == 'null');
 
   /// Capitalize given String
-  String capitalizeFirstLetter() => (validate().length >= 1)
+  String capitalizeFirstLetter() => (validate().isNotEmpty)
       ? (this!.substring(0, 1).toUpperCase() + this!.substring(1).toLowerCase())
       : validate();
 
   // Check null string, return given value if null
   String validate({String value = ''}) {
-    if (this.isEmptyOrNull) {
+    if (isEmptyOrNull) {
       return value;
     } else {
       return this!;
@@ -42,7 +42,7 @@ extension StringExtension on String? {
 
   bool isJson() {
     try {
-      json.decode(this.validate());
+      json.decode(validate());
     } catch (e) {
       return false;
     }
@@ -51,7 +51,7 @@ extension StringExtension on String? {
 
   String splitBefore(Pattern pattern) {
     ArgumentError.checkNotNull(pattern, 'pattern');
-    var matchIterator = pattern.allMatches(this.validate()).iterator;
+    var matchIterator = pattern.allMatches(validate()).iterator;
 
     Match? match;
     while (matchIterator.moveNext()) {
@@ -59,7 +59,7 @@ extension StringExtension on String? {
     }
 
     if (match != null) {
-      return this.validate().substring(0, match.start);
+      return validate().substring(0, match.start);
     }
     return '';
   }
@@ -71,7 +71,7 @@ extension StringExtension on String? {
     if (matchIterator.moveNext()) {
       var match = matchIterator.current;
       var length = match.end - match.start;
-      return this.validate().substring(match.start + length);
+      return validate().substring(match.start + length);
     }
     return '';
   }

@@ -1,7 +1,6 @@
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import '../../core/utils/common_method.dart';
+import 'common_method.dart';
 
 // This functions are responsible to make UI responsive across all the mobile devices.
 

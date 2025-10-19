@@ -74,9 +74,6 @@ class NotificationService {
     String? token;
     if (Platform.isIOS) {
       token = await FirebaseMessaging.instance.getAPNSToken();
-      if (token == null) {
-        token = await FirebaseMessaging.instance.getToken();
-      }
     } else {
       token = await FirebaseMessaging.instance.getToken();
     }

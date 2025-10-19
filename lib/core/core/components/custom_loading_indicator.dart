@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import '../theme/colors.dart';
 import '../utils/extensions/app_common.dart';
-import '../utils/size_utils.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
   const CustomLoadingIndicator({super.key});

@@ -150,7 +150,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
     List<Widget>? icons,
   }) {
     return GestureDetector(
-      onTap: () => setState(() => selectedPayment = value!),
+      onTap: () => setState(() => selectedPayment = value),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
