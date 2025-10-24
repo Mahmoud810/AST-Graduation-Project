@@ -52,6 +52,7 @@ flutter:
     - assets/google.png
     - assets/facebook.png
     - assets/apple.png
+    - assets/pharmacy_logo.png
 flutter_assets:
   assets_path: assets/
   output_path: lib/core/core/assets/genImages/
