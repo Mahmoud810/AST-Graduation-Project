@@ -39,7 +39,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Future<void> _logout() async {
     await _auth.signOut();
     if (mounted) {
-      Navigator.pushNamedAndRemoveUntil(context, '/signin', (_) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/getstarted', (_) => false);
     }
   }
 

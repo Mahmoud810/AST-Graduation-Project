@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/NavBar.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/screens/Authentication/Get_Started.dart';
 import 'package:graduation_project/screens/Authentication/signin_screen.dart';
 import 'package:graduation_project/screens/Authentication/signup_screen.dart';
 import 'package:graduation_project/screens/Authentication/splash_screen.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/navbar': (context) => const NavBar(),
+        '/getstarted': (context) => const GetStarted(),
       },
     );
   }
