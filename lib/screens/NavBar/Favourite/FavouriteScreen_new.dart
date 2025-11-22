@@ -4,6 +4,7 @@ import 'package:graduation_project/data/models/favourite_item_model.dart';
 import 'package:graduation_project/data/services/cart_service.dart';
 import 'package:graduation_project/data/services/favourite_service.dart';
 import 'package:graduation_project/data/services/product_service.dart';
+import 'package:graduation_project/screens/ProductDetails/product_details_screen.dart';
 import '../../BaseViews/BaseView.dart';
 
 class FavouriteScreenNew extends StatefulWidget {
@@ -78,13 +79,47 @@ class _FavouriteScreenNewState extends State<FavouriteScreenNew> {
     }
   }
 
+  Future<void> _viewProductDetails(FavouriteItem item) async {
+    // Get the full product details
+    final product = await _productService.getProductById(item.productId);
+    if (product != null && mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProductDetailsScreen(product: product),
+        ),
+      ).then((_) {
+        // Refresh when returning from details
+        setState(() {});
+      });
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Product not found'),
+          duration: Duration(seconds: 1),
+          backgroundColor: AppColors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView(
       title: 'Favourites',
       isContainSearch: false,
-      onMenuPressed: () {},
-      onNotificationPressed: () {},
+      onMenuPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
+      onNotificationPressed: () {
+        // TODO: Navigate to notifications screen
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Notifications coming soon!'),
+            duration: Duration(seconds: 1),
+          ),
+        );
+      },
       body: StreamBuilder<List<FavouriteItem>>(
         stream: _favouriteService.getUserFavourites(),
         builder: (context, snapshot) {
@@ -168,10 +203,13 @@ class _FavouriteScreenNewState extends State<FavouriteScreenNew> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
+                child: InkWell(
+                  onTap: () => _viewProductDetails(item),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      children: [
                       // Product Image
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
@@ -286,6 +324,7 @@ class _FavouriteScreenNewState extends State<FavouriteScreenNew> {
                         ],
                       ),
                     ],
+                  ),
                   ),
                 ),
               );
