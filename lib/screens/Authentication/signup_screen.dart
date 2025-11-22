@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/data/services/user_service.dart';
 import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -17,6 +15,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+  final _userService = UserService();
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -28,50 +27,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _signUp() async {
     if (_nameController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Please enter your name")));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please enter your name")),
+        );
+      }
       return;
     }
 
     if (_passwordController.text.trim() !=
         _confirmPasswordController.text.trim()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Passwords do not match")),
+        );
+      }
       return;
     }
 
     try {
       // Create user in Firebase Auth
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim(),
-          );
-
-      // Hash password using SHA-256
-      var bytes = utf8.encode(_passwordController.text.trim());
-      var hashedPassword = sha256.convert(bytes).toString();
-
-      // Store user details in Firestore
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
-        'uid': userCredential.user!.uid,
-        'name': _nameController.text.trim(),
-        'email': _emailController.text.trim(),
-        'password': hashedPassword,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account created successfully!')),
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
 
-      Navigator.pushReplacementNamed(context, '/signin');
+      // Update display name
+      await userCredential.user?.updateDisplayName(_nameController.text.trim());
+
+      // Initialize user document using UserService
+      await _userService.initializeUserDocument();
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Account created successfully!')),
+        );
+        Navigator.pushReplacementNamed(context, '/signin');
+      }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.message ?? 'Signup failed')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message ?? 'Signup failed')),
+        );
+      }
     }
   }
 

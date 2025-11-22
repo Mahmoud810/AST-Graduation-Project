@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/data/services/user_service.dart';
 import 'package:graduation_project/screens/Authentication/google_auth_service.dart';
 import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
 
@@ -15,6 +16,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+  final _userService = UserService();
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -29,24 +31,26 @@ class _SignInScreenState extends State<SignInScreen> {
 
       final user = userCredential.user;
       if (user != null) {
-        DocumentSnapshot userDoc = await _firestore
-            .collection('users')
-            .doc(user.uid)
-            .get();
+        // Initialize user document if it doesn't exist
+        await _userService.initializeUserDocument();
 
-        if (userDoc.exists) {
-          String userName = userDoc['name'];
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text("Welcome, $userName!")));
+        // Try to get user name for welcome message
+        final userData = await _userService.getCurrentUserData();
+        final userName = userData?['displayName'] ?? userData?['email'] ?? 'User';
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Welcome, $userName!")),
+          );
+          Navigator.pushReplacementNamed(context, '/navbar');
         }
-
-        Navigator.pushReplacementNamed(context, '/navbar');
       }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.message ?? 'Login failed')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message ?? 'Login failed')),
+        );
+      }
     }
   }
 
@@ -162,25 +166,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () async {
                     final user = await GoogleAuthService().signInWithGoogle();
                     if (user != null) {
-                      final userDoc = await _firestore
-                          .collection('users')
-                          .doc(user.uid)
-                          .get();
+                      // Initialize user document using UserService
+                      await _userService.initializeUserDocument();
 
-                      if (!userDoc.exists) {
-                        await _firestore.collection('users').doc(user.uid).set({
-                          'uid': user.uid,
-                          'name': user.displayName ?? 'Google User',
-                          'email': user.email,
-                          'createdAt': FieldValue.serverTimestamp(),
-                        });
+                      if (mounted) {
+                        Navigator.pushReplacementNamed(context, '/navbar');
                       }
-
-                      Navigator.pushReplacementNamed(context, '/navbar');
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Google Sign-In failed")),
-                      );
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Google Sign-In failed")),
+                        );
+                      }
                     }
                   },
                   icon: Image.asset('assets/google.png', height: 24),

@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      // Safely check if user exists and has admin role
+      return isSignedIn() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Products Collection - Read for all authenticated users, Write for admins only
+    // TEMPORARY: Allow all authenticated users to create products (for development)
+    match /products/{productId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn(); // Temporary - for adding sample data
+      allow update, delete: if isAdmin();
+    }
+    
+    // Users Collection
+    match /users/{userId} {
+      // Allow users to create their own document on first login
+      allow create: if isSignedIn() && isOwner(userId);
+      allow read, update, delete: if isSignedIn() && isOwner(userId);
+      
+      // TEMPORARY DEVELOPMENT RULES - More permissive for testing
+      // User's Cart Subcollection - Only the owner can access
+      match /cart/{cartItemId} {
+        allow read, write: if isSignedIn();  // Simplified for development
+      }
+      
+      // User's Favourites Subcollection - Only the owner can access
+      match /favourites/{favouriteId} {
+        allow read, write: if isSignedIn();  // Simplified for development
+      }
+      
+      // User's Orders Subcollection - Only the owner can read/write
+      match /orders/{orderId} {
+        allow read, write: if isSignedIn();  // Simplified for development
+      }
+    }
+    
+    // Default rule - deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
