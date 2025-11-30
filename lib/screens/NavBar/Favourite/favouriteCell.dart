@@ -8,11 +8,11 @@ class CustomCell extends StatelessWidget {
   final String image;
 
   const CustomCell({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

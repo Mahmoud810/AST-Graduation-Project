@@ -254,7 +254,7 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                                   onPressed: () => _decreaseQuantity(item),
                                                 ),
                                               ),
-                                              const SizedBox(width: 12),
+                                              const SizedBox(width: 8),
 
                                               // Quantity
                                               Text(
@@ -264,7 +264,7 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              const SizedBox(width: 12),
+                                              const SizedBox(width: 8),
 
                                               // Increase button
                                               Container(
@@ -284,12 +284,15 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                               const Spacer(),
 
                                               // Total price for item
-                                              Text(
-                                                'EGP ${item.totalPrice.toStringAsFixed(2)}',
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: AppColors.appColor,
+                                              Flexible(
+                                                child: Text(
+                                                  'EGP ${item.totalPrice.toStringAsFixed(2)}',
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.appColor,
+                                                  ),
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],

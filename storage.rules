@@ -1,0 +1,27 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Prescription images - strict access control
+    match /prescriptions/{userId}/{allPaths=**} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId);
+      allow delete: if isOwner(userId);
+    }
+    
+    // General file size and type validation for all uploads
+    match /{allPaths=**} {
+      allow write: if request.resource.size < 10 * 1024 * 1024 && // 10MB limit
+        (request.resource.contentType.matches('image/.*') ||
+         request.resource.contentType.matches('application/pdf'));
+    }
+  }
+}

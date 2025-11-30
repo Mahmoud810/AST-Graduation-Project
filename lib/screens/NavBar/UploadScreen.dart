@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
-import 'package:graduation_project/screens/BaseViews/baseview.dart';
+import 'prescription_upload_screen.dart';
 
 class UploadScreen extends StatelessWidget {
   const UploadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-      title: "Upload Screen",
-      isContainSearch: false,
-      body: const Center(child: Text('This is the Upload Screen')),
-    );
+    // PrescriptionUploadScreen already has its own Scaffold and AppBar
+    // No need to wrap it in BaseView
+    return const PrescriptionUploadScreen();
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/screens/choose_accounts.dart';
 
@@ -14,7 +13,6 @@ class WelcomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            
             Align(
               alignment: Alignment.topRight,
               child: Container(
@@ -32,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
             // اللوجو والنصوص
             Column(
               children: [
-              /*  Image.asset(
+                /*  Image.asset(
                   img, 
                   height: 100,
                 ),*/
@@ -42,22 +40,18 @@ class WelcomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color:AppColors.appColor, //  
+                    color: AppColors.appColor, //
                   ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   "The best way to quickly way order\nmedicine anywhere",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
             ),
 
-         
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
               child: SizedBox(
@@ -66,9 +60,9 @@ class WelcomeScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                               context,
-                             MaterialPageRoute(
-                               builder: (context) => ChooseAccounts ()));
+                      context,
+                      MaterialPageRoute(builder: (context) => ChooseAccounts()),
+                    );
                     // هنا تحطي التنقل لصفحة تانية
                   },
                   style: ElevatedButton.styleFrom(

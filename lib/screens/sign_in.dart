@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/core/core/utils/extensions/app_common.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -11,7 +10,6 @@ class SignIn extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-          
             //height: 300,
             color: AppColors.appColor,
           ),
@@ -19,7 +17,6 @@ class SignIn extends StatelessWidget {
           Positioned.fill(
             top: 180,
             child: Container(
-          
               height: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -28,13 +25,13 @@ class SignIn extends StatelessWidget {
                   topRight: Radius.circular(24),
                 ),
               ),
-               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                     const TextField(
+                    const TextField(
                       decoration: InputDecoration(
                         labelText: "Email address",
                         hintText: "Enter your email",
@@ -43,7 +40,6 @@ class SignIn extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
 
-                   
                     const TextField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -60,19 +56,18 @@ class SignIn extends StatelessWidget {
                         onPressed: () {},
                         child: const Text(
                           "Forget password?",
-                          style: TextStyle(color:AppColors.appColor),
+                          style: TextStyle(color: AppColors.appColor),
                         ),
                       ),
                     ),
                     Row(
                       children: [
                         Checkbox(value: true, onChanged: (v) {}),
-                         Text("Remember me"),
+                        Text("Remember me"),
                       ],
                     ),
                     const SizedBox(height: 10),
 
-                    
                     SizedBox(
                       width: double.infinity,
                       height: 50,
@@ -95,9 +90,8 @@ class SignIn extends StatelessWidget {
                       ),
                     ),
 
- const SizedBox(height: 25),
+                    const SizedBox(height: 25),
 
-     
                     const Row(
                       children: [
                         Expanded(child: Divider(thickness: 1)),
@@ -111,25 +105,24 @@ class SignIn extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-               
-                Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('assets/facebook.png'),
                         const SizedBox(width: 20),
-                     Image.asset('assets/goggle.png'),
+                        Image.asset('assets/goggle.png'),
                         const SizedBox(width: 20),
-                       Image.asset('assets/apple.png'),
+                        Image.asset('assets/apple.png'),
                       ],
                     ),
-                    SizedBox(height: 10,),
-                    
+                    SizedBox(height: 10),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Text("Don't have account? "),
                         Text(
-                          "Sign Up",  //عايزه اعملها زرار
+                          "Sign Up", //عايزه اعملها زرار
                           style: TextStyle(
                             color: AppColors.appColor,
                             fontWeight: FontWeight.bold,
@@ -143,7 +136,6 @@ class SignIn extends StatelessWidget {
             ),
           ),
 
-          
           Positioned(
             top: 50,
             left: 20,
@@ -176,18 +168,5 @@ class SignIn extends StatelessWidget {
         ],
       ),
     );
-                    
-         
-      
-    
-      
-       }
+  }
 }
-      
-      
-      
-      
-      
-      
-      
-      

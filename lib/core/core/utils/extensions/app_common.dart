@@ -10,12 +10,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../../../../constants.dart';
 import '../..//utils/app_constants.dart';
 import '../..//utils/extensions/boolean_extension.dart';
 import '../..//utils/size_utils.dart';
 
 import '../../enums/toast_enum.dart';
-import '../../theme/colors.dart';
 import 'string_extensions.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
@@ -52,28 +52,28 @@ InputDecoration inputDecoration(
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
       borderSide: BorderSide(
-        color: borderColor ?? AppColors.gray4Color,
+        color: borderColor ?? AppColors.greyLight,
         width: borderWidth ?? 1,
       ),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
       borderSide: BorderSide(
-        color: borderColor ?? AppColors.gray4Color,
+        color: borderColor ?? AppColors.greyLight,
         width: borderWidth ?? 1,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
       borderSide: BorderSide(
-        color: focusedBorderColor ?? AppColors.gray4Color,
+        color: focusedBorderColor ?? AppColors.greyLight,
         width: borderWidth ?? 1,
       ),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRad ?? defaultRadius),
       borderSide: BorderSide(
-        color: borderColor ?? AppColors.gray4Color,
+        color: borderColor ?? AppColors.greyLight,
         width: borderWidth ?? 1,
       ),
     ),
@@ -84,7 +84,7 @@ InputDecoration inputDecoration(
     filled: true,
     isDense: true,
     contentPadding: padding,
-    fillColor: fillColor ?? AppColors.gray9Color,
+    fillColor: fillColor ?? AppColors.surface,
     labelText: label,
     labelStyle: primaryTextFeildTextStyle(),
     hintStyle: hintStyle,
@@ -200,7 +200,7 @@ bool hasMatch(String? s, String p) {
 
 Color getColorFromHex(
   String hexColor, {
-  Color defaultColor = AppColors.orangColor,
+  Color defaultColor = AppColors.warning,
 }) {
   if (hexColor.isEmpty) {
     return defaultColor;
@@ -510,7 +510,7 @@ Color chooseToastColor(ToastStates state) {
       color = Colors.green;
       break;
     case ToastStates.error:
-      color = AppColors.redColor;
+      color = AppColors.error;
       break;
     case ToastStates.warning:
       color = Colors.amber;

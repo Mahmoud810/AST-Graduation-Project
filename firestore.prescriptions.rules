@@ -1,0 +1,23 @@
+// Add these rules to your existing firestore.rules file
+
+// Prescriptions collection rules
+match /users/{userId}/prescriptions/{prescriptionId} {
+  allow read, write, delete: if request.auth != null && request.auth.uid == userId;
+  allow create: if request.auth != null && 
+    request.auth.uid == userId &&
+    request.resource.data.keys().hasAll([
+      'userId', 'imageUrl', 'thumbnailUrl', 'timestamp', 'fileName', 'fileSize', 'status'
+    ]) &&
+    request.resource.data.userId == userId &&
+    request.resource.data.imageUrl is string &&
+    request.resource.data.thumbnailUrl is string &&
+    request.resource.data.fileName is string &&
+    request.resource.data.fileSize is number &&
+    request.resource.data.fileSize > 0 &&
+    request.resource.data.status in ['uploading', 'completed', 'failed'];
+}
+
+// Allow listing prescriptions for a user
+match /users/{userId}/prescriptions {
+  allow list: if request.auth != null && request.auth.uid == userId;
+}

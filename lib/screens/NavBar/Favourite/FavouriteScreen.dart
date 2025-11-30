@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/screens/BaseViews/BaseView.dart';
-import '../../BaseViews/BaseBackView.dart';
 import 'favouriteCell.dart'; // renamed properly
 
 class FavouriteScreen extends StatelessWidget {

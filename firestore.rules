@@ -33,6 +33,13 @@ service cloud.firestore {
       allow create: if isSignedIn() && isOwner(userId);
       allow read, update, delete: if isSignedIn() && isOwner(userId);
       
+      // User's Prescriptions Subcollection - Only the owner can access
+      match /prescriptions/{prescriptionId} {
+        allow read: if isSignedIn() && isOwner(userId);
+        allow create: if isSignedIn() && isOwner(userId);
+        allow update, delete: if isSignedIn() && isOwner(userId);
+      }
+      
       // TEMPORARY DEVELOPMENT RULES - More permissive for testing
       // User's Cart Subcollection - Only the owner can access
       match /cart/{cartItemId} {

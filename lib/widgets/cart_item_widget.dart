@@ -31,12 +31,9 @@ class CartItemWidget extends StatelessWidget {
           item.title,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Row(
-          children: [
-            Text('x${item.quantity}'),
-            const SizedBox(width: 10),
-            Text('EGP ${item.price.toStringAsFixed(2)}'),
-          ],
+        subtitle: Text(
+          'x${item.quantity}  •  EGP ${item.price.toStringAsFixed(2)}',
+          overflow: TextOverflow.ellipsis,
         ),
         trailing: IconButton(
           icon: const Icon(Icons.delete, color: AppColors.red),

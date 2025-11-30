@@ -5,6 +5,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/services/user_service.dart';
 import 'package:graduation_project/screens/Authentication/google_auth_service.dart';
 import 'package:graduation_project/screens/BaseViews/BaseBackView.dart';
+import '../../core/core/services/loading_service.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,31 +25,70 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _signIn() async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+      final userCredential = await context.withLoading(
+        () async {
+          return await _auth.signInWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
+        },
+        message: 'Signing in...',
       );
 
       final user = userCredential.user;
       if (user != null) {
-        // Initialize user document if it doesn't exist
-        await _userService.initializeUserDocument();
+        // Initialize user document with loading
+        await context.withLoading(
+          () => _userService.initializeUserDocument(),
+          message: 'Setting up your account...',
+        );
 
         // Try to get user name for welcome message
         final userData = await _userService.getCurrentUserData();
-        final userName = userData?['displayName'] ?? userData?['email'] ?? 'User';
-        
+        final userName =
+            userData?['displayName'] ?? userData?['email'] ?? 'User';
+
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Welcome, $userName!")),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text("Welcome, $userName!")));
           Navigator.pushReplacementNamed(context, '/navbar');
         }
       }
     } on FirebaseAuthException catch (e) {
       if (mounted) {
+        String errorMessage = 'An error occurred';
+        switch (e.code) {
+          case 'user-not-found':
+            errorMessage = 'No user found with this email';
+            break;
+          case 'wrong-password':
+            errorMessage = 'Wrong password provided';
+            break;
+          case 'invalid-email':
+            errorMessage = 'Invalid email address';
+            break;
+          case 'user-disabled':
+            errorMessage = 'User account has been disabled';
+            break;
+          case 'too-many-requests':
+            errorMessage = 'Too many requests. Try again later';
+            break;
+          case 'network-request-failed':
+            errorMessage = 'Network error. Check your connection';
+            break;
+          default:
+            errorMessage = e.message ?? 'Authentication failed';
+        }
+        
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message ?? 'Login failed')),
+          SnackBar(content: Text(errorMessage)),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}')),
         );
       }
     }
@@ -144,52 +184,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 25),
-              Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 1)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("Or login with"),
-                  ),
-                  Expanded(child: Divider(thickness: 1)),
-                ],
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: OutlinedButton.icon(
-                  onPressed: () async {
-                    final user = await GoogleAuthService().signInWithGoogle();
-                    if (user != null) {
-                      // Initialize user document using UserService
-                      await _userService.initializeUserDocument();
-
-                      if (mounted) {
-                        Navigator.pushReplacementNamed(context, '/navbar');
-                      }
-                    } else {
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Google Sign-In failed")),
-                        );
-                      }
-                    }
-                  },
-                  icon: Image.asset('assets/google.png', height: 24),
-                  label: const Text(
-                    "Sign in with Google",
-                    style: TextStyle(color: Colors.black87),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    side: const BorderSide(color: AppColors.grey),
                   ),
                 ),
               ),
