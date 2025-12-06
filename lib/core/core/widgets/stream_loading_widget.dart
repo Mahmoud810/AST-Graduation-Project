@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import '../components/custom_loading_indicator.dart';
-import '../../../constants.dart';
+import '../theme/colors.dart';
 import '../utils/extensions/app_common.dart';
 
 /// Widget for handling StreamBuilder with loading states
@@ -30,14 +30,14 @@ class StreamLoadingWidget<T> extends StatelessWidget {
       builder: (context, snapshot) {
         // Loading state
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return customLoadingWidget ?? 
-                 _LoadingWidget(message: loadingMessage ?? 'Loading...');
+          return customLoadingWidget ??
+              _LoadingWidget(message: loadingMessage ?? 'Loading...');
         }
 
         // Error state
         if (snapshot.hasError) {
-          return errorBuilder?.call(snapshot.error) ?? 
-                 _ErrorWidget(error: snapshot.error);
+          return errorBuilder?.call(snapshot.error) ??
+              _ErrorWidget(error: snapshot.error);
         }
 
         // No data state
@@ -83,14 +83,14 @@ class FutureLoadingWidget<T> extends StatelessWidget {
       builder: (context, snapshot) {
         // Loading state
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return customLoadingWidget ?? 
-                 _LoadingWidget(message: loadingMessage ?? 'Loading...');
+          return customLoadingWidget ??
+              _LoadingWidget(message: loadingMessage ?? 'Loading...');
         }
 
         // Error state
         if (snapshot.hasError) {
-          return errorBuilder?.call(snapshot.error) ?? 
-                 _ErrorWidget(error: snapshot.error);
+          return errorBuilder?.call(snapshot.error) ??
+              _ErrorWidget(error: snapshot.error);
         }
 
         // No data state
@@ -127,17 +127,14 @@ class _LoadingWidget extends StatelessWidget {
             height: 60,
             child: LoadingIndicator(
               indicatorType: Indicator.ballScale,
-              colors: [AppColors.appColor],
+              colors: [AppColors.primaryColor],
               strokeWidth: 2,
             ),
           ),
           const SizedBox(height: 16),
           Text(
             message,
-            style: primaryTextStyle(
-              color: AppColors.textDark,
-              size: 14,
-            ),
+            style: primaryTextStyle(color: AppColors.text1Color, size: 14),
             textAlign: TextAlign.center,
           ),
         ],
@@ -158,16 +155,12 @@ class _ErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.error_outline,
-            color: AppColors.error,
-            size: 50,
-          ),
+          const Icon(Icons.error_outline, color: AppColors.redColor, size: 50),
           const SizedBox(height: 16),
           Text(
             'Something went wrong',
             style: primaryTextStyle(
-              color: AppColors.textDark,
+              color: AppColors.text1Color,
               size: 16,
               weight: FontWeight.w600,
             ),
@@ -175,20 +168,19 @@ class _ErrorWidget extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             error?.toString() ?? 'Unknown error',
-            style: primaryTextStyle(
-              color: AppColors.textHint,
-              size: 14,
-            ),
+            style: primaryTextStyle(color: AppColors.text1Color, size: 14),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              // Refresh the page or retry
-              Navigator.of(context).pop();
+              // try a safer retry: pop if possible, otherwise do nothing
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.appColor,
+              backgroundColor: AppColors.primaryColor,
               foregroundColor: Colors.white,
             ),
             child: const Text('Retry'),
@@ -209,18 +201,14 @@ class _EmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.inbox_outlined,
-            color: AppColors.textHint,
-            size: 64,
-          ),
+          Icon(Icons.inbox_outlined, color: AppColors.text1Color, size: 64),
           const SizedBox(height: 16),
           Text(
             'No data available',
             style: primaryTextStyle(
-              color: AppColors.textHint,
+              color: AppColors.text1Color,
               size: 16,
-              weight: FontWeight.w500,
+              weight: FontWeight.w600,
             ),
           ),
         ],
@@ -230,8 +218,8 @@ class _EmptyWidget extends StatelessWidget {
 }
 
 /// Extension for easy usage
-extension StreamLoadingExtension<T> on Stream<T> {
-  Widget withLoading({
+extension StreamLoadingExtension on Stream {
+  Widget withLoading<T>({
     required Widget Function(T data) builder,
     Widget Function(Object? error)? errorBuilder,
     Widget Function()? emptyBuilder,
@@ -239,7 +227,7 @@ extension StreamLoadingExtension<T> on Stream<T> {
     Widget? customLoadingWidget,
   }) {
     return StreamLoadingWidget<T>(
-      stream: this,
+      stream: this as Stream<T>,
       builder: builder,
       errorBuilder: errorBuilder,
       emptyBuilder: emptyBuilder,
@@ -249,8 +237,8 @@ extension StreamLoadingExtension<T> on Stream<T> {
   }
 }
 
-extension FutureLoadingExtension<T> on Future<T> {
-  Widget withLoading({
+extension FutureLoadingExtension on Future {
+  Widget withLoading<T>({
     required Widget Function(T data) builder,
     Widget Function(Object? error)? errorBuilder,
     Widget Function()? emptyBuilder,
@@ -258,7 +246,7 @@ extension FutureLoadingExtension<T> on Future<T> {
     Widget? customLoadingWidget,
   }) {
     return FutureLoadingWidget<T>(
-      future: this,
+      future: this as Future<T>,
       builder: builder,
       errorBuilder: errorBuilder,
       emptyBuilder: emptyBuilder,
