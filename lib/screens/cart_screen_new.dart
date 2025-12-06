@@ -242,16 +242,20 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: AppColors.appColor,
+                                                    width: 1,
                                                   ),
-                                                  borderRadius: BorderRadius.circular(8),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                child: IconButton(
-                                                  icon: const Icon(Icons.remove),
-                                                  iconSize: 18,
-                                                  color: AppColors.appColor,
-                                                  padding: const EdgeInsets.all(4),
-                                                  constraints: const BoxConstraints(),
-                                                  onPressed: () => _decreaseQuantity(item),
+                                                child: InkWell(
+                                                  onTap: () => _decreaseQuantity(item),
+                                                  child: const Padding(
+                                                    padding: EdgeInsets.all(4),
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      size: 14,
+                                                      color: AppColors.appColor,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               const SizedBox(width: 8),
@@ -260,7 +264,7 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                               Text(
                                                 item.quantity.toString(),
                                                 style: const TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -270,21 +274,24 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                               Container(
                                                 decoration: BoxDecoration(
                                                   color: AppColors.appColor,
-                                                  borderRadius: BorderRadius.circular(8),
+                                                  borderRadius: BorderRadius.circular(6),
                                                 ),
-                                                child: IconButton(
-                                                  icon: const Icon(Icons.add),
-                                                  iconSize: 18,
-                                                  color: AppColors.white,
-                                                  padding: const EdgeInsets.all(4),
-                                                  constraints: const BoxConstraints(),
-                                                  onPressed: () => _increaseQuantity(item),
+                                                child: InkWell(
+                                                  onTap: () => _increaseQuantity(item),
+                                                  child: const Padding(
+                                                    padding: EdgeInsets.all(4),
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      size: 14,
+                                                      color: AppColors.white,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                              const Spacer(),
+                                              const SizedBox(width: 16),
 
                                               // Total price for item
-                                              Flexible(
+                                              Expanded(
                                                 child: Text(
                                                   'EGP ${item.totalPrice.toStringAsFixed(2)}',
                                                   style: const TextStyle(
@@ -293,6 +300,7 @@ class _CartScreenNewState extends State<CartScreenNew> {
                                                     color: AppColors.appColor,
                                                   ),
                                                   overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.right,
                                                 ),
                                               ),
                                             ],
